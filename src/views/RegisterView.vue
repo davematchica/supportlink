@@ -1,3 +1,49 @@
+<script>
+import { ref } from 'vue'
+
+export default {
+  name: 'RegisterView',
+  setup() {
+    const theme = ref('light')
+    const name = ref('')
+    const email = ref('')
+    const password = ref('')
+    const rules = {
+      required: value => !!value || 'This field is required.',
+      email: value => /.+@.+\..+/.test(value) || 'Enter a valid email.',
+      minLength: value =>
+        value.length >= 6 || 'Password must be at least 6 characters.',
+    }
+
+    const onClick = () => {
+      theme.value = theme.value === 'light' ? 'dark' : 'light'
+    }
+
+    const handleRegister = () => {
+      console.log('Registering user:', {
+        name: name.value,
+        email: email.value,
+        password: password.value,
+      })
+
+      // Simulate successful registration and redirect to login
+      alert('Registration successful!')
+      window.location.href = '/' // Redirect to login page
+    }
+
+    return {
+      theme,
+      name,
+      email,
+      password,
+      rules,
+      onClick,
+      handleRegister,
+    }
+  },
+}
+</script>
+
 <template>
   <v-responsive class="border rounded">
     <v-app :theme="theme">
@@ -72,53 +118,3 @@
     </v-app>
   </v-responsive>
 </template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  name: 'RegisterView',
-  setup() {
-    const theme = ref('light')
-    const name = ref('')
-    const email = ref('')
-    const password = ref('')
-    const rules = {
-      required: value => !!value || 'This field is required.',
-      email: value => /.+@.+\..+/.test(value) || 'Enter a valid email.',
-      minLength: value =>
-        value.length >= 6 || 'Password must be at least 6 characters.',
-    }
-
-    const onClick = () => {
-      theme.value = theme.value === 'light' ? 'dark' : 'light'
-    }
-
-    const handleRegister = () => {
-      console.log('Registering user:', {
-        name: name.value,
-        email: email.value,
-        password: password.value,
-      })
-
-      // Simulate successful registration and redirect to login
-      alert('Registration successful!')
-      window.location.href = '/' // Redirect to login page
-    }
-
-    return {
-      theme,
-      name,
-      email,
-      password,
-      rules,
-      onClick,
-      handleRegister,
-    }
-  },
-}
-</script>
-
-<style>
-/* Add styling for the RegisterView if needed */
-</style>
